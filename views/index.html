@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body ng-app="listaroo">
+    <div ng-controller="listCtrl">
+      <ul ng-repeat="list in lists">
+        <h2>{{list.title}}</h2>
+        <li ng-repeat="list_item in list.list_items">
+          <span ng-click="list_item.editing = true" ng-hide="list_item.editing">{{list_item.content}}</span>
+          <input autofocus ng-change="list_item.editted = true" ng-blur="list_item.editing = false" ng-show="list_item.editing" type="text" ng-model="list_item.content">
+          <span ng-show="list_item.editted">EDITED</span>
+          <a href="" ng-click="deleteListItem(list_item)">Delete</a>
+          <a href="" ng-click="list_item.editing = !list_item.editing ">Edit</a>
+        </li>
+      </ul>
+    </div>
+    <script src="../vendor/angular.min.js" type="text/javascript"></script>
+    <script src="../app/app.js" type="text/javascript"></script>
+    <script src="../app/controllers/listCtrl.js" type="text/javascript"></script>
+    <script src="../app/services/listService.js" type="text/javascript"></script>
+  </body>
+</html>
