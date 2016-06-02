@@ -13,4 +13,8 @@ angular.module("listaroo")
       $scope.deleteListItem = function(listItem) {
         listService.deleteListItem(listItem);
       }
+
+      $scope.addListItem = function(list) {
+        listService.addListItem(list, $scope.newestListItem)
+      }
   });

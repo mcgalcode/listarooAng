@@ -16,4 +16,18 @@ angular.module("listaroo")
       $http.delete('http://localhost:3000/api/list_items/' + listItem.id)
     }
 
+    this.addListItem = function(list, item_content) {
+      $http({
+        method: 'POST',
+        url: 'http://localhost:3000/api/list_items',
+        headers: {
+          'Content-Type' : 'text'
+        },
+        data: {
+          'parent_list_id': list.id,
+          'content': item_content
+        }
+      });
+    }
+
   });
