@@ -5,10 +5,36 @@ angular.module("listaroo")
         .then(callback);
     }
 
+    this.addList = function(listTitle, callback) {
+      $http({
+        method: 'POST',
+        url: 'http://localhost:3000/api/lists',
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        data: {
+          title: listTitle
+        }
+      }).then(callback);
+    }
+
     this.deleteList = function(list, callback) {
       $http({
       method: 'DELETE',
       url: 'http://localhost:3000/api/lists/' + list.id
+      }).then(callback);
+    }
+
+    this.updateList = function(list, callback) {
+      $http({
+        method: 'PUT',
+        url: 'http://localhost:3000/api/lists/' + list.id,
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        data: {
+          'title': list.title
+        }
       }).then(callback);
     }
 
@@ -32,6 +58,19 @@ angular.module("listaroo")
         }
       })
         .then(callback);
+    }
+
+    this.updateListItem = function(list_item, callback) {
+      $http({
+        method: 'PUT',
+        url: 'http://localhost:3000/api/list_items/' + list_item.id,
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        data: {
+          'content' : list_item.content
+        }
+      }).then(callback);
     }
 
   });

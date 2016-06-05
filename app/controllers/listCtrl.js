@@ -6,6 +6,17 @@ angular.module("listaroo")
           $scope.lists = response.data;
       });
 
+      $scope.addList = function(listTitle) {
+        listService.addList(listTitle, function(response) {
+          $scope.lists.push(response.data);
+        });
+      }
+
+      $scope.updateList = function(list) {
+        listService.updateList(list, function(response) {
+        });
+      }
+
       $scope.deleteList = function(list) {
         listService.deleteList(list, function(response) {
           var id = response.data.id;
@@ -25,6 +36,11 @@ angular.module("listaroo")
       $scope.addListItem = function(list, content) {
         listService.addListItem(list, content, function(response) {
           list.list_items.push(response.data)
+        });
+      }
+
+      $scope.updateListItem = function(list_item){
+        listService.updateListItem(list_item, function(response) {
         });
       }
 
