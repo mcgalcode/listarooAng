@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="../vendor/css/normalize.css" />
+    <link rel="stylesheet" href="../assets/css/index.css" />
   </head>
   <body ng-app="listaroo">
     <div ng-controller="listCtrl">
-      <ul ng-repeat="list in lists">
-        <h2 ng-show="!list.editing">{{list.title}}</h2>
-        <input type="text" ng-show="list.editing" ng-model="list.title">
-        <a href="" ng-click="deleteList(list)">Delete list</a>
-        <a href="" ng-show="!list.editing"ng-click="list.editing = true">Edit Title</a>
-        <a href="" ng-show="list.editing"ng-click="list.editing = false; updateList(list);">Save</a>
-        <li ng-repeat="list_item in list.list_items">
+      <div id="list-index" ng-hide="viewingList">
+        <ul id="list-list">
+          <li ng-repeat="list in lists">
+            <a href="" ng-click="$parent.viewingList = true; $parent.currentList = list">{{list.title}}</a>
+          </li>
+        </ul>
+        <h1>Add a new list here!</h1>
+        <input type="text" ng-model="newestListTitle"><a href="" ng-click="addList(newestListTitle)">Add!</a>
+      </div>
+      <div ng-show="viewingList">
+        <a href="" ng-click="viewingList = false">Close</a>
+        <h2 ng-show="!currentList.editing">{{currentList.title}}</h2>
+        <input type="text" ng-show="currentList.editing" ng-model="currentList.title">
+        <a href="" ng-click="deleteList(currentList)">Delete list</a>
+        <a href="" ng-show="!currentList.editing"ng-click="currentList.editing = true">Edit Title</a>
+        <a href="" ng-show="currentList.editing"ng-click="currentList.editing = false; updateList(currentList);">Save</a>
+        <li ng-repeat="list_item in currentList.list_items">
           <span ng-click="list_item.editing = true" ng-hide="list_item.editing">{{list_item.content}}</span>
           <input autofocus ng-change="list_item.editted = true;" ng-show="list_item.editing" type="text" ng-model="list_item.content">
           <span ng-show="list_item.editted">EDITED</span>
-          <a href="" ng-click="deleteListItem(list, list_item)">Delete</a>
+          <a href="" ng-click="deleteListItem(currentList, list_item)">Delete</a>
           <a href="" ng-click="list_item.editing = true " ng-show=" !list_item.editing">Edit</a>
           <a href="" ng-click=" updateListItem(list_item); list_item.editing = false;" ng-show="list_item.editing">Save</a>
         </li>
-        <input type="text" ng-model="newestListItem"><a href="" ng-click="addListItem(list, newestListItem)">Add</a>
-      </ul>
-      <h1>Add a new list here!</h1>
-      <input type="text" ng-model="newestListTitle"><a href="" ng-click="addList(newestListTitle)">Add!</a>
+        <input type="text" ng-model="newestListItem"><a href="" ng-click="addListItem(currentList, newestListItem)">Add</a>
+      </div>
     </div>
     <script src="../vendor/angular.min.js" type="text/javascript"></script>
     <script src="../app/app.js" type="text/javascript"></script>

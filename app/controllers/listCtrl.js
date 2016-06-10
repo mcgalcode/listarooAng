@@ -1,5 +1,7 @@
 angular.module("listaroo")
   .controller("listCtrl", function($scope, $interval, listService) {
+
+      $scope.viewingList = false;
       $scope.message = "Hi";
       listService.getLists(function(response) {
           console.log(response.data);
