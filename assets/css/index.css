@@ -1,0 +1,15 @@
+#list-index {
+  width: 600px;
+  margin: auto;
+  border-radius: 5px;
+  border: 2px solid black;
+  padding: 5px;
+}
+
+#new-list-text {
+  font-size: 14px;
+}
+
+#new-list-title {
+  padding: 10px;
+}

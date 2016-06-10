@@ -8,18 +8,18 @@
     <div ng-controller="listCtrl">
       <div id="list-index" ng-hide="viewingList">
         <ul id="list-list">
-          <li ng-repeat="list in lists">
+          <li ng-repeat="list in lists" class="list-title">
             <a href="" ng-click="$parent.viewingList = true; $parent.currentList = list">{{list.title}}</a>
           </li>
         </ul>
-        <h1>Add a new list here!</h1>
-        <input type="text" ng-model="newestListTitle"><a href="" ng-click="addList(newestListTitle)">Add!</a>
+        <h1 id="new-list-text">Add a new list here!</h1>
+        <input type="text" id="new-list-title" ng-model="newestListTitle"><a href="" ng-click="addList(newestListTitle)">Add!</a>
       </div>
       <div ng-show="viewingList">
         <a href="" ng-click="viewingList = false">Close</a>
         <h2 ng-show="!currentList.editing">{{currentList.title}}</h2>
         <input type="text" ng-show="currentList.editing" ng-model="currentList.title">
-        <a href="" ng-click="deleteList(currentList)">Delete list</a>
+        <a href="" ng-click="deleteList(currentList); viewingList = false">Delete list</a>
         <a href="" ng-show="!currentList.editing"ng-click="currentList.editing = true">Edit Title</a>
         <a href="" ng-show="currentList.editing"ng-click="currentList.editing = false; updateList(currentList);">Save</a>
         <li ng-repeat="list_item in currentList.list_items">
