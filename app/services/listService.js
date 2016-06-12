@@ -1,7 +1,7 @@
 angular.module("listaroo")
 
   .service("listService", function($http) {
-    var rootUrl = "http://localhost:3000"
+    var rootUrl = "http://listaroo.herokuapp.com"
 
     this.getLists = function(callback) {
       $http.get(rootUrl + "/api/lists.json")
@@ -49,7 +49,7 @@ angular.module("listaroo")
     this.addListItem = function(list, item_content, callback) {
       $http({
         method: 'POST',
-        url: 'http://localhost:3000/api/list_items',
+        url: rootUrl + '/api/list_items',
         headers: {
           'Content-Type' : 'application/json'
         },
@@ -66,7 +66,7 @@ angular.module("listaroo")
     this.updateListItem = function(list_item, callback) {
       $http({
         method: 'PUT',
-        url: 'http://localhost:3000/api/list_items/' + list_item.id,
+        url: rootUrl + '/api/list_items/' + list_item.id,
         headers: {
           'Content-Type' : 'application/json'
         },
