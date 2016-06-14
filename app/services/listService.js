@@ -46,40 +46,4 @@ angular.module("listaroo")
         }
       }).then(callback);
     }
-
-    this.deleteListItem = function(listItem, callback) {
-      $http.delete(rootUrl + '/api/list_items/' + listItem.id)
-        .then(callback);
-    }
-
-    this.addListItem = function(list, item_content, callback) {
-      $http({
-        method: 'POST',
-        url: rootUrl + '/api/list_items',
-        headers: {
-          'Content-Type' : 'application/json'
-        },
-        data: {
-          'list_item' : {
-            'content' : item_content,
-            'list_id' : list.id
-          }
-        }
-      })
-        .then(callback);
-    }
-
-    this.updateListItem = function(list_item, callback) {
-      $http({
-        method: 'PUT',
-        url: rootUrl + '/api/list_items/' + list_item.id,
-        headers: {
-          'Content-Type' : 'application/json'
-        },
-        data: {
-          'content' : list_item.content
-        }
-      }).then(callback);
-    }
-
   });

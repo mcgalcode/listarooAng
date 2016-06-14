@@ -1,1 +1,16 @@
-angular.module("listaroo", []);
+var mod = angular.module("listaroo", ['ngRoute', 'ngCookies']);
+  mod.config(function($routeProvider) {
+    $routeProvider
+      .when('/lists', {
+          template: '<list-box></list-box>'
+      })
+      .when('/signup', {
+        template: '<sign-up></sign-up>'
+      })
+      .when('/login', {
+        template: '<sessions></sessions>'
+      });
+  }
+
+
+);

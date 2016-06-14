@@ -5,50 +5,18 @@
     <link rel="stylesheet" href="../assets/css/index.css" />
   </head>
   <body ng-app="listaroo">
-    <div ng-controller="listCtrl">
-      <div class="main-container" id="list-index">
-        <div>{{listTitleStack.join(" > ")}}
-        <h2 ng-show="!currentList.editing">{{currentList.title}}</h2>
-        <input type="text" ng-show="currentList.editing" ng-model="currentList.title">
-        <p ng-click="listTitleStack.pop(); parentListStack.pop(); getList(parentListStack[parentListStack.length-1]);" ng-show="parentListStack.length > 1">Back</p>
-        <div id="list-controls">
-          <a href="" ng-show="!currentList.editing && getCurrentListId() !== 0"ng-click="currentList.editing = true">Edit Title</a>
-          <a href="" ng-show="currentList.editing"ng-click="currentList.editing = false; updateList(currentList);">Save</a>
-          <a href="" ng-click="deleteList(currentList); listTitleStack.pop(); parentListStack.pop(); getList(parentListStack[parentListStack.length-1]);" ng-show="currentList.id !== 0">Delete list</a>
-        </div>
-        <ul id="list-list" ng-show="getCurrentListChildren().length > 0">
-          <li ng-repeat="sublist in getCurrentListChildren()" class="list-title">
-            <span ng-click="$parent.listTitleStack.push(sublist.title); $parent.parentListStack.push(sublist.id); setParentList(currentList); setCurrentList(sublist)" ng-hide="sublist.editing">{{sublist.title}}</span>
-            <input autofocus ng-change="sublist.editted = true;" ng-show="sublist.editing" type="text" ng-model="sublist.title">
-            <a href="" ng-click="deleteList(sublist)">Delete</a>
-            <a href="" ng-click="sublist.editing = true " ng-show=" !sublist.editing">Edit</a>
-            <a href="" ng-click=" updateList(sublist); sublist.editing = false;" ng-show="sublist.editing">Save</a>
-          </li>
-        </ul>
-        <h1 id="new-list-text">Add a new list here!</h1>
-        <input type="text" id="new-list-title" ng-model="newestListTitle"><a href="" ng-click="addList(newestListTitle)">Add!</a>
-      </div>
-
-      <!-- <div class="main-container" ng-show="viewingList">
-        <a href="" class="back-button" ng-click="viewingList = false">Back</a>
-        <h2 ng-show="!currentList.editing">{{currentList.title}}</h2>
-        <input type="text" ng-show="currentList.editing" ng-model="currentList.title">
-        <a href="" ng-click="deleteList(currentList); viewingList = false">Delete list</a>
-        <a href="" ng-show="!currentList.editing"ng-click="currentList.editing = true">Edit Title</a>
-        <a href="" ng-show="currentList.editing"ng-click="currentList.editing = false; updateList(currentList);">Save</a>
-        <li ng-repeat="sublist in currentList.child_lists">
-          <span ng-click="sublist.editing = true" ng-hide="sublist.editing">{{sublist.title}}</span>
-          <input autofocus ng-change="sublist.editted = true;" ng-show="sublist.editing" type="text" ng-model="sublist.title">
-          <a href="" ng-click="deleteList(sublist)">Delete</a>
-          <a href="" ng-click="sublist.editing = true " ng-show=" !sublist.editing">Edit</a>
-          <a href="" ng-click=" updateList(sublist); sublist.editing = false;" ng-show="sublist.editing">Save</a>
-        </li>
-        <input type="text" ng-model="newestListTitle"><a href="" ng-click="addList(currentList.id, newestListTitle)">Add</a>
-      </div> -->
-    </div>
+    <div ng-view></div>
     <script src="../vendor/angular.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-cookies.min.js"></script>
     <script src="../app/app.js" type="text/javascript"></script>
-    <script src="../app/controllers/listCtrl.js" type="text/javascript"></script>
     <script src="../app/services/listService.js" type="text/javascript"></script>
+    <script src="../app/services/signUpService.js" type="text/javascript"></script>
+    <script src="../app/services/sessionService.js" type="text/javascript"></script>
+    <script src="../app/components/listBox.js" type="text/javascript"></script>
+    <script src="../app/components/signUp.js" type="text/javascript"></script>
+    <script src="../app/components/sessions.js" type="text/javascript"></script>
+    <script src="../app/interceptors/authToken.js" type="text/javascript"></script>
+
   </body>
 </html>
