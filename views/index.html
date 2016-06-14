@@ -6,33 +6,44 @@
   </head>
   <body ng-app="listaroo">
     <div ng-controller="listCtrl">
-      <div class="main-container" id="list-index" ng-hide="viewingList">
-        <h2>Your Lists</h2>
+      <div class="main-container" id="list-index">
+        <h2 ng-show="!currentList.editing">{{currentList.title}}</h2>
+        <input type="text" ng-show="currentList.editing" ng-model="currentList.title">
+        <p ng-click="parentListStack.pop(); getList(parentListStack[parentListStack.length-1]);" ng-show="parentListStack.length > 1">Back</p>
+        <div id="list-controls">
+          <a href="" ng-show="!currentList.editing && getCurrentListId() !== 0"ng-click="currentList.editing = true">Edit Title</a>
+          <a href="" ng-show="currentList.editing"ng-click="currentList.editing = false; updateList(currentList);">Save</a>
+          <a href="" ng-click="deleteList(currentList); parentListStack.pop(); getList(parentListStack[parentListStack.length-1]);" ng-show="currentList.id !== 0">Delete list</a>
+        </div>
         <ul id="list-list">
-          <li ng-repeat="list in lists" class="list-title" ng-click="$parent.viewingList = true; $parent.currentList = list">
-            {{list.title}}
+          <li ng-repeat="sublist in getCurrentListChildren()" class="list-title">
+            <span ng-click="$parent.parentListStack.push(sublist.id); setParentList(currentList); setCurrentList(sublist)" ng-hide="sublist.editing">{{sublist.title}}</span>
+            <input autofocus ng-change="sublist.editted = true;" ng-show="sublist.editing" type="text" ng-model="sublist.title">
+            <a href="" ng-click="deleteList(sublist)">Delete</a>
+            <a href="" ng-click="sublist.editing = true " ng-show=" !sublist.editing">Edit</a>
+            <a href="" ng-click=" updateList(sublist); sublist.editing = false;" ng-show="sublist.editing">Save</a>
           </li>
         </ul>
         <h1 id="new-list-text">Add a new list here!</h1>
         <input type="text" id="new-list-title" ng-model="newestListTitle"><a href="" ng-click="addList(newestListTitle)">Add!</a>
       </div>
 
-      <div class="main-container" ng-show="viewingList">
+      <!-- <div class="main-container" ng-show="viewingList">
         <a href="" class="back-button" ng-click="viewingList = false">Back</a>
         <h2 ng-show="!currentList.editing">{{currentList.title}}</h2>
         <input type="text" ng-show="currentList.editing" ng-model="currentList.title">
         <a href="" ng-click="deleteList(currentList); viewingList = false">Delete list</a>
         <a href="" ng-show="!currentList.editing"ng-click="currentList.editing = true">Edit Title</a>
         <a href="" ng-show="currentList.editing"ng-click="currentList.editing = false; updateList(currentList);">Save</a>
-        <li ng-repeat="list_item in currentList.list_items">
-          <span ng-click="list_item.editing = true" ng-hide="list_item.editing">{{list_item.content}}</span>
-          <input autofocus ng-change="list_item.editted = true;" ng-show="list_item.editing" type="text" ng-model="list_item.content">
-          <a href="" ng-click="deleteListItem(currentList, list_item)">Delete</a>
-          <a href="" ng-click="list_item.editing = true " ng-show=" !list_item.editing">Edit</a>
-          <a href="" ng-click=" updateListItem(list_item); list_item.editing = false;" ng-show="list_item.editing">Save</a>
+        <li ng-repeat="sublist in currentList.child_lists">
+          <span ng-click="sublist.editing = true" ng-hide="sublist.editing">{{sublist.title}}</span>
+          <input autofocus ng-change="sublist.editted = true;" ng-show="sublist.editing" type="text" ng-model="sublist.title">
+          <a href="" ng-click="deleteList(sublist)">Delete</a>
+          <a href="" ng-click="sublist.editing = true " ng-show=" !sublist.editing">Edit</a>
+          <a href="" ng-click=" updateList(sublist); sublist.editing = false;" ng-show="sublist.editing">Save</a>
         </li>
-        <input type="text" ng-model="newestListItem"><a href="" ng-click="addListItem(currentList, newestListItem)">Add</a>
-      </div>
+        <input type="text" ng-model="newestListTitle"><a href="" ng-click="addList(currentList.id, newestListTitle)">Add</a>
+      </div> -->
     </div>
     <script src="../vendor/angular.min.js" type="text/javascript"></script>
     <script src="../app/app.js" type="text/javascript"></script>
