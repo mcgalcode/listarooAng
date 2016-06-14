@@ -1,0 +1,27 @@
+<div class="main-container">
+  Welcome {{user.username}}
+  <a href="" ng-click="logout()">Log Out</a>
+  <h1>Your Teams</h1>
+  <ul>
+
+    <h2>Your created teams</h2>
+
+    <li ng-repeat="team in createdTeams">
+      <span ng-click="goToTeam(team)">{{team.name}}</span>
+
+
+    </li>
+  </ul>
+  <ul>
+    <h2>Your invited teams</h2>
+    <li ng-repeat="team in invitedTeams">
+      <span ng-click="goToTeam(team)">{{team.name}}</span>
+
+
+    </li>
+  </ul>
+  <p>
+    <input type="text" ng-model="newTeamName">
+    <a href="" ng-click="addTeam(newTeamName)">Add team!</a>
+  </p>
+</div>

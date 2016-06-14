@@ -7,7 +7,7 @@ angular.module("listaroo").
         signUpService.submitSignUp($scope.user, function(response) {
           $cookies.putObject('user', response.data);
           $scope.userId = $cookies.getObject('user').id;
-          $location.path('/lists');
+          $location.path('/teams');
         });
       }
     }

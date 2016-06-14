@@ -1,7 +1,7 @@
 angular.module("listaroo")
   .component("listBox", {
       templateUrl: "listbox.html",
-      controller: function($scope, $cookies, $location, listService, sessionService) {
+      controller: function($scope, $cookies, $location, $routeParams, teamService, listService, sessionService) {
 
         $scope.viewingList = false;
         $scope.message = "Hi";
@@ -12,13 +12,17 @@ angular.module("listaroo")
 
         checkLoggedIn();
 
-
-        listService.getLists(function(response) {
-            $scope.currentList.child_lists = response.data;
-            $scope.currentList.title = "Your Team's Lists";
-            $scope.currentList.id = 0;
-            $scope.listTitleStack.push($scope.currentList.title);
+        teamService.getTeam($routeParams["teamId"], function(response) {
+          $scope.team = response.data;
+          listService.getLists($scope.team.id, function(response) {
+              $scope.currentList.child_lists = response.data;
+              $scope.currentList.title = $scope.team.name;
+              $scope.currentList.id = 0;
+              $scope.listTitleStack.push($scope.currentList.title);
+          });
         });
+
+
 
         $scope.logout = function() {
           sessionService.logout($scope.userId, function(response) {
@@ -75,7 +79,7 @@ angular.module("listaroo")
         }
 
         $scope.addList = function(listTitle) {
-          listService.addList($scope.currentList.id, listTitle, function(response) {
+          listService.addList($scope.team.id, $scope.currentList.id, listTitle, function(response) {
             $scope.currentList.child_lists.push(response.data);
             $scope.newestListTitle = "";
           });

@@ -1,7 +1,7 @@
 var mod = angular.module("listaroo", ['ngRoute', 'ngCookies']);
   mod.config(function($routeProvider) {
     $routeProvider
-      .when('/lists', {
+      .when('/teams/:teamId/lists', {
           template: '<list-box></list-box>'
       })
       .when('/signup', {
@@ -9,6 +9,9 @@ var mod = angular.module("listaroo", ['ngRoute', 'ngCookies']);
       })
       .when('/login', {
         template: '<sessions></sessions>'
+      })
+      .when('/teams', {
+        template: '<team-box></team-box>'
       });
   }
 
