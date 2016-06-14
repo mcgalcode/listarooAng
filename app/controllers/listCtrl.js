@@ -6,12 +6,14 @@ angular.module("listaroo")
       $scope.currentList = {};
       $scope.parentListStack = [0];
       $scope.parentList = {};
+      $scope.listTitleStack = [];
 
       listService.getLists(function(response) {
           console.log(response.data);
           $scope.currentList.child_lists = response.data;
           $scope.currentList.title = "Your Team's Lists";
           $scope.currentList.id = 0;
+          $scope.listTitleStack.push($scope.currentList.title);
       });
 
       $scope.setCurrentList = function(list) {
@@ -52,6 +54,7 @@ angular.module("listaroo")
       $scope.addList = function(listTitle) {
         listService.addList($scope.currentList.id, listTitle, function(response) {
           $scope.currentList.child_lists.push(response.data);
+          $scope.newestListTitle = "";
         });
       }
 

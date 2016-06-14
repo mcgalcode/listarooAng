@@ -7,17 +7,18 @@
   <body ng-app="listaroo">
     <div ng-controller="listCtrl">
       <div class="main-container" id="list-index">
+        <div>{{listTitleStack.join(" > ")}}
         <h2 ng-show="!currentList.editing">{{currentList.title}}</h2>
         <input type="text" ng-show="currentList.editing" ng-model="currentList.title">
-        <p ng-click="parentListStack.pop(); getList(parentListStack[parentListStack.length-1]);" ng-show="parentListStack.length > 1">Back</p>
+        <p ng-click="listTitleStack.pop(); parentListStack.pop(); getList(parentListStack[parentListStack.length-1]);" ng-show="parentListStack.length > 1">Back</p>
         <div id="list-controls">
           <a href="" ng-show="!currentList.editing && getCurrentListId() !== 0"ng-click="currentList.editing = true">Edit Title</a>
           <a href="" ng-show="currentList.editing"ng-click="currentList.editing = false; updateList(currentList);">Save</a>
-          <a href="" ng-click="deleteList(currentList); parentListStack.pop(); getList(parentListStack[parentListStack.length-1]);" ng-show="currentList.id !== 0">Delete list</a>
+          <a href="" ng-click="deleteList(currentList); listTitleStack.pop(); parentListStack.pop(); getList(parentListStack[parentListStack.length-1]);" ng-show="currentList.id !== 0">Delete list</a>
         </div>
-        <ul id="list-list">
+        <ul id="list-list" ng-show="getCurrentListChildren().length > 0">
           <li ng-repeat="sublist in getCurrentListChildren()" class="list-title">
-            <span ng-click="$parent.parentListStack.push(sublist.id); setParentList(currentList); setCurrentList(sublist)" ng-hide="sublist.editing">{{sublist.title}}</span>
+            <span ng-click="$parent.listTitleStack.push(sublist.title); $parent.parentListStack.push(sublist.id); setParentList(currentList); setCurrentList(sublist)" ng-hide="sublist.editing">{{sublist.title}}</span>
             <input autofocus ng-change="sublist.editted = true;" ng-show="sublist.editing" type="text" ng-model="sublist.title">
             <a href="" ng-click="deleteList(sublist)">Delete</a>
             <a href="" ng-click="sublist.editing = true " ng-show=" !sublist.editing">Edit</a>
