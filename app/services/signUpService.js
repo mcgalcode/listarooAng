@@ -1,6 +1,6 @@
 angular.module("listaroo").
-  service("signUpService", function($http) {
-    var rootUrl = "http://localhost:3000";
+  service("signUpService", function($http, $rootScope) {
+    var rootUrl = $rootScope.baseUrl;
 
     this.submitSignUp = function(newUser, callback) {
       $http.post(

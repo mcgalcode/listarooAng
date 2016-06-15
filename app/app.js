@@ -1,5 +1,7 @@
 var mod = angular.module("listaroo", ['ngRoute', 'ngCookies']);
   mod.config(function($routeProvider) {
+
+
     $routeProvider
       .when('/teams/:teamId/lists', {
           template: '<list-box></list-box>'

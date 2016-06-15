@@ -1,7 +1,7 @@
 angular.module("listaroo").
-  service("teamService", function($http) {
+  service("teamService", function($http, $rootScope) {
 
-    var rootUrl = "http://localhost:3000";
+    var rootUrl = $rootScope.baseUrl;
 
     this.getCreatedTeamsFromUser = function(userId, successCallback) {
       $http.get(

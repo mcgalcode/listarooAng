@@ -1,6 +1,8 @@
 angular.module("listaroo").
-  service("sessionService", function($http, $cookies) {
-    var rootUrl = "http://localhost:3000";
+  service("sessionService", function($http, $cookies, $rootScope) {
+    $rootScope.baseUrl = "http://listaroo.herokuapp.com"
+
+    var rootUrl = $rootScope.baseUrl;
 
     this.submitLogin = function(username, password, callback) {
       $http.post(

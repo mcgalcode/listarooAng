@@ -1,7 +1,7 @@
 angular.module("listaroo")
 
-  .service("listService", function($http) {
-    var rootUrl = "http://localhost:3000"
+  .service("listService", function($http, $rootScope) {
+    var rootUrl = $rootScope.baseUrl;
 
     this.getLists = function(teamId, callback) {
       $http.get(rootUrl + "/api/lists.json?teamId=" + teamId)
