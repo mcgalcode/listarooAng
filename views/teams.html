@@ -1,5 +1,5 @@
-<div class="main-container">
-  Welcome {{user.username}}
+<div class="centered-container">
+  <p>Welcome {{user.username}}</p>
   <a href="" ng-click="logout()">Log Out</a>
   <h1>Your Teams</h1>
   <ul>
@@ -7,8 +7,8 @@
     <h2>Your created teams</h2>
 
     <li ng-repeat="team in createdTeams">
-      <span ng-click="goToTeam(team)">{{team.name}}</span>
-      <span ng-click="deleteTeam(true, team.id)">Delete</span>
+      <span ng-click="goToTeam(team)" class="team-name">{{team.name}}</span>
+      <span ng-click="deleteTeam(true, team.id)" class="team-delete">Delete</span>
 
 
     </li>
@@ -16,8 +16,8 @@
   <ul>
     <h2>Your invited teams</h2>
     <li ng-repeat="team in invitedTeams">
-      <span ng-click="goToTeam(team)">{{team.name}}</span>
-      <span ng-click="deleteTeam(false, team.id)">Delete</span>
+      <span ng-click="goToTeam(team)" class="team-name">{{team.name}}</span>
+      <span ng-click="deleteTeam(false, team.id)" class="team-delete">Delete</span>
 
     </li>
   </ul>

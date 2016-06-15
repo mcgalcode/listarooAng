@@ -15,7 +15,8 @@ var mod = angular.module("listaroo", ['ngRoute', 'ngCookies']);
       .when('/teams', {
         template: '<team-box></team-box>'
       });
-  }
+  });
 
-
-);
+mod.run(function($rootScope) {
+    $rootScope.baseUrl = "http://localhost:3000";
+});

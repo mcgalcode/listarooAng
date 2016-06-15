@@ -2,59 +2,57 @@
   <nav id="top-banner" class="flex">
     <span id="team-title">
       <h2 id="team-name">{{team.name}}</h2>
-      <a href="#/teams">See all teams</a>
+      <a href="#/teams"><span class="glyphicon glyphicon-arrow-left"></span> See all teams</a>
     </span>
 
     <span>Logged in as {{user.username}}  <a href="" ng-click="logout()">(Log Out)</a></span>
   </nav>
 
   <div id="content-area">
+
     <div class="team-sidebar sidebar">
 
-      <p id="team-creator">team created by {{team.creator.username}}</p>
+      <p id="team-creator">team created by:<br /> {{team.creator.username}}</p>
 
+      <h4>Team Members:</h4>
       <ul id="team-members">
         <li ng-repeat="member in team.invited_users">
           {{member.username}}
         </li>
-      </ul>
+        <input id="invited-user-input" type="text" ng-model="invitedUserName">
 
-      <a href="" ng-click="inviteToTeam(invitedUserName)">Invite another user:</a>
-      <input type="text" ng-model="invitedUserName">
+        <a href="" ng-click="inviteToTeam(invitedUserName)">Invite!</a>
+      </ul>
     </div>
 
     <div id="list-area">
       <div id="list-info" ng-show="hasParent()" class="flex">
-        <span id="current-list-control">
+          <span  id="back-button" ng-click="goBackToParent();" class="glyphicon glyphicon-arrow-left list-button"></span>
           <h2 id="current-list-title" ng-show="!currentList.editing">{{currentList.title}}</h2>
           <input type="text" ng-show="currentList.editing" ng-model="currentList.title">
-          <a href="" ng-show="!currentList.editing && getCurrentListId() !== 0"ng-click="currentList.editing = true" class="glyphicon glyphicon-pencil"></a>
+          <span ng-show="!currentList.editing && getCurrentListId() !== 0"ng-click="currentList.editing = true" class="glyphicon glyphicon-pencil list-button"></span>
+          <span  id="delete-current-list" class="list-button glyphicon glyphicon-trash" ng-click="deleteList(currentList); goBackToParent()" ng-show="currentList.id !== 0"></span>
           <a href="" ng-show="currentList.editing"ng-click="currentList.editing = false; updateList(currentList);" class="glyphicon glyphicon-ok"></a>
           <span id="list-breadcrumbs">{{listTitleStack.join(" > ")}}</span>
-        </span>
-        <span id="list-buttons"  ng-show="parentListStack.length > 1">
-          <span  id="back-button" ng-click="goBackToParent();" class="glyphicon glyphicon-arrow-left"></span>
-          <span  id="delete-current-list" class="glyphicon glyphicon-trash" ng-click="deleteList(currentList); goBackToParent()" ng-show="currentList.id !== 0"></span>
-        </span>
       </div>
 
-      <ul id="list-list" ng-show="getCurrentListChildren().length > 0">
-        <li ng-repeat="sublist in getCurrentListChildren()" class="sublist" class="flex">
-          <div class="sublist-title"  ng-click="goToSubList(sublist)" >
-            <span ng-hide="sublist.editing">{{sublist.title}}</span>
-            <span ng-show="sublist.has_children">has children</span>
-            <input autofocus ng-change="sublist.editted = true;" ng-show="sublist.editing" type="text" ng-model="sublist.title">
+      <ul id="list-list">
+        <li ng-repeat="sublist in getCurrentListChildren()" ng-class="{'sublist-hover': !sublist.editing}" class="sublist flex">
+          <div class="sublist-box flex"  ng-click="sublist.editing || goToSubList(sublist)" >
+            <span ng-hide="sublist.editing" class="sublist-title">{{sublist.title}}</span>
+            <input autofocus ng-change="sublist.editted = true;" ng-show="sublist.editing" type="text" ng-model="sublist.title" class="inline-list-entry editted-list-title">
           </div>
-          <div class="list-controls">
-            <a href="" ng-click="deleteList(sublist)">Delete</a>
-            <a href="" ng-click="sublist.editing = true " ng-show=" !sublist.editing">Edit</a>
-            <a href="" ng-click=" updateList(sublist); sublist.editing = false;" ng-show="sublist.editing">Save</a>
-          </div>
+          <span class="list-controls" class="flex">
+            <span ng-click="deleteList(sublist)" class="list-control">Delete</span>
+            <span ng-click="sublist.editing = true " ng-show=" !sublist.editing" class="list-control">Edit</span>
+            <span ng-click=" updateList(sublist); sublist.editing = false;" ng-show="sublist.editing" class="list-control">Save</span>
+          </span>
         </li>
+        <li class="sublist flex" ng-show="getCurrentListChildren().length === 0">This list has no items yet! Add one below</li>
+        <li id="new-list" class="sublist flex">
+          <input placeholder="Add a new item here!" type="text" id="new-list-title" ng-model="newestListTitle" class="inline-list-entry">
+          <span ng-click="addList(newestListTitle)" class="glyphicon glyphicon-plus list-button"></span></li>
       </ul>
-      <p ng-show="getCurrentListChildren().length === 0">This list has no items yet! Add one below</p>
-      <h1 id="new-list-text">Add a new list item here!</h1>
-      <input type="text" id="new-list-title" ng-model="newestListTitle"><a href="" ng-click="addList(newestListTitle)">Add!</a>
 
     </div>
   </div>

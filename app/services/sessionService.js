@@ -1,6 +1,5 @@
 angular.module("listaroo").
   service("sessionService", function($http, $cookies, $rootScope) {
-    $rootScope.baseUrl = "http://listaroo.herokuapp.com"
 
     var rootUrl = $rootScope.baseUrl;
 

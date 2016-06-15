@@ -12,6 +12,10 @@ a {
   color: currentColor;
 }
 
+input {
+  color: black;
+}
+
 list-box {
     height: 100%;
     display: flex;
@@ -29,12 +33,22 @@ list-box {
 .team-sidebar {
   background-color: #005071;
   padding: 10px;
-  width: 150px;
+  width: 175px;
   flex-grow: 0;
 }
 
-.team-sidebar a {
-  color: currentColor;
+#invite-box {
+  background-color: black;
+  z-index: 99;
+}
+
+#invited-user-input {
+  width: 125px;
+}
+
+#team-members {
+  list-style:square ;
+  padding: 0;
 }
 
 
@@ -56,7 +70,7 @@ list-box {
 
 
 #team-name {
-  margin: 0;
+  margin: 0 20px 0 0;
   display: inline-block;
 }
 
@@ -75,18 +89,18 @@ list-box {
 #list-info {
   background-color: #FFFFFF;
   color: black;
-  align-content: center;
+  align-items: center;
   padding: 3px;
-  justify-content: space-between;
 }
 
-#list-buttons span {
+.list-button {
   font-size: 20px;
-  cursor: pointer;
+  margin-right: 10px;
 }
 
-#list-buttons span:hover {
+.list-button:hover {
   color: #AAAAAA;
+  cursor: pointer;
 }
 
 #list-info a {
@@ -100,6 +114,7 @@ list-box {
 #current-list-title {
   display: inline;
   font-size: 20px;
+  margin: 0 10px 0 0;
 }
 
 #list-breadcrumbs {
@@ -127,27 +142,64 @@ list-box {
   list-style: none;
   display: flex;
   margin: 0;
-  padding: 5px;
+  padding: 0;
+  align-content: center;
   background-color: #FFFFFF;
   border-bottom: 1px solid #AAA;
 }
 
-.sublist:hover {
+.sublist-hover:hover {
   background-color: #333333;
   color: white;
   cursor: pointer;
 }
 
-.sublist-title {
+.sublist-box {
   flex-grow: 1;
+}
+
+.sublist-title {
+  height: 35px;
+  line-height: 35px;
+  display: inline-block;
+}
+
+.list-controls {
+  display: flex;
+  align-items: center;
+}
+
+.list-control {
+  margin-right: 10px;
 }
 
 #new-list-text {
   font-size: 14px;
 }
 
-#new-list-title {
-  padding: 10px;
+#editted-list-title {
+  width: 100%;
+  flex-grow: 1;
+}
+
+.inline-list-entry {
+  height: 35px;
+  padding: 0px;
+  flex-grow: 1;
+}
+
+#new-list {
+  padding: 0;
+  align-content: center;
+}
+
+#new-list:hover {
+  background-color: #FFFFFF;
+  color: black;
+}
+
+#new-list-box {
+
 }
 
 .back-button {
@@ -163,4 +215,15 @@ list-box {
   margin: auto;
   margin-top: 50px;
   padding: 30px;
+}
+
+
+/* TEAM VIEW */
+
+.team-delete:hover {
+  cursor: pointer;
+}
+
+.team-name:hover {
+  cursor: pointer;
 }
