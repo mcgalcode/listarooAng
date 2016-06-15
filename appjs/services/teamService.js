@@ -28,5 +28,20 @@ angular.module("listaroo").
       ).then(successCallback);
     }
 
+    this.deleteTeam = function(teamId, successCallback) {
+      $http.delete(
+        rootUrl + "/api/teams/" + teamId
+      ).then(successCallback);
+    }
+
+    this.inviteToTeam = function(username, teamId, successCallback) {
+      $http.post(
+        rootUrl + "/api/teams/" + teamId + "/invite",
+        {
+          "username" : username
+        }
+      )
+    }
+
 
   });

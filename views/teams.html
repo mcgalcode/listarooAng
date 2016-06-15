@@ -8,6 +8,7 @@
 
     <li ng-repeat="team in createdTeams">
       <span ng-click="goToTeam(team)">{{team.name}}</span>
+      <span ng-click="deleteTeam(true, team.id)">Delete</span>
 
 
     </li>
@@ -16,7 +17,7 @@
     <h2>Your invited teams</h2>
     <li ng-repeat="team in invitedTeams">
       <span ng-click="goToTeam(team)">{{team.name}}</span>
-
+      <span ng-click="deleteTeam(false, team.id)">Delete</span>
 
     </li>
   </ul>

@@ -1,33 +1,145 @@
+html, body {
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+  color: #EEEBBC;
+}
+
 .main-container {
-  width: 600px;
-  margin: auto;
-  border-radius: 5px;
-  border: 2px solid black;
-  padding: 5px;
-  margin-top: 50px;
-  position: relative;
-  background-color: #99CCFF;
+  height: 100%;
+}
+
+a {
+  color: currentColor;
+}
+
+list-box {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+
+.flex {
+  display: flex;
+}
+
+/* Sidebar */
+
+.team-sidebar {
+  background-color: #005071;
+  padding: 10px;
+  width: 150px;
+  flex-grow: 0;
+}
+
+.team-sidebar a {
+  color: currentColor;
+}
+
+
+/* TOP NAVIGATION BAR */
+
+#top-banner {
+  align-items: center;
+  background-color: #00305B;
+  height: 60px;
+  padding: 10px;
+  flex-grow: 0;
+  justify-content: space-between;
+}
+
+#top-banner a {
+  color: #EEEBBC;
+}
+
+
+
+#team-name {
+  margin: 0;
+  display: inline-block;
+}
+
+/* CONTENT AREA */
+#content-area {
+  display: flex;
+  align-items: stretch;
+  flex-grow: 1;
+}
+
+
+/* LIST AREA */
+
+/* LIST INFO AREA */
+
+#list-info {
+  background-color: #FFFFFF;
+  color: black;
+  align-content: center;
+  padding: 3px;
+  justify-content: space-between;
+}
+
+#list-buttons span {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#list-buttons span:hover {
+  color: #AAAAAA;
+}
+
+#list-info a {
+  color: black;
+}
+
+#current-list-control * {
+  height: 30px;
+}
+
+#current-list-title {
+  display: inline;
+  font-size: 20px;
+}
+
+#list-breadcrumbs {
+  padding-left: 20px;
+}
+
+/* LIST CONTENT AREA */
+
+#list-area {
+  width: 100%;
+  background-color: #FCFCFC;
+  color: #040404;
 }
 
 #list-list {
   padding: 0;
+  margin: 0;
   border-top: 1px solid black;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
+  width: 100%
 }
 
-#list-list .list-title {
-  list-style: none;
+/* LIST  ITEMS */
 
+.sublist {
+  list-style: none;
+  display: flex;
   margin: 0;
   padding: 5px;
   background-color: #FFFFFF;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #AAA;
 }
 
-#list-list .list-title:hover {
-  background-color: #6699FF;
+.sublist:hover {
+  background-color: #333333;
+  color: white;
   cursor: pointer;
+}
+
+.sublist-title {
+  flex-grow: 1;
 }
 
 #new-list-text {
@@ -42,4 +154,13 @@
   position: absolute;
   top: 15px;
   right: 15px;
+}
+
+.centered-container {
+  width: 80%;
+  background-color: #00305B;
+  color: #EEEBBC;
+  margin: auto;
+  margin-top: 50px;
+  padding: 30px;
 }

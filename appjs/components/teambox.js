@@ -5,7 +5,6 @@ angular.module("listaroo").
 
 
       setCurrentUser();
-      getTeamsFromUser($scope.user.id);
 
 
       function getTeamsFromUser(userId) {
@@ -38,9 +37,31 @@ angular.module("listaroo").
         });
       }
 
+      $scope.deleteTeam = function(createdTeam, teamId) {
+        teamService.deleteTeam(teamId, function(response) {
+          if (createdTeam) {
+            var teamIndex = findEntityById($scope.createdTeams, teamId);
+            $scope.createdTeams.splice(teamIndex, 1);
+          } else {
+            var teamIndex = findEntityById($scope.invitedTeams, teamId);
+            $scope.invitedTeams.splice(teamIndex, 1);
+          }
+        });
+      }
+
+      function findEntityById(entityArray, id) {
+        for ( k = 0; k < entityArray.length; k++ ) {
+          if ( entityArray[k].id ===  id ) {
+            return k;
+          }
+        }
+        return null;
+      }
+
       function setCurrentUser() {
         if ($cookies.getObject("user")) {
           $scope.user = $cookies.getObject("user");
+          getTeamsFromUser($scope.user.id);
         } else {
           $location.path("/login");
         }

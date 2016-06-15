@@ -10,25 +10,17 @@ angular.module("listaroo")
         $scope.parentList = {};
         $scope.listTitleStack = [];
 
-        checkLoggedIn();
-
-        teamService.getTeam($routeParams["teamId"], function(response) {
-          $scope.team = response.data;
-          listService.getLists($scope.team.id, function(response) {
-              $scope.currentList.child_lists = response.data;
-              $scope.currentList.title = $scope.team.name;
-              $scope.currentList.id = 0;
-              $scope.listTitleStack.push($scope.currentList.title);
-          });
-        });
-
-
+        checkLoggedInAndGetLists();
 
         $scope.logout = function() {
-          sessionService.logout($scope.userId, function(response) {
+          sessionService.logout($scope.user.id, function(response) {
             $cookies.remove('user');
             $location.path('/login');
           });
+        }
+
+        $scope.hasParent = function() {
+          return $scope.parentListStack.length > 1
         }
 
         $scope.goToSubList = function(list) {
@@ -66,7 +58,7 @@ angular.module("listaroo")
 
         $scope.getList = function(listId) {
           if (listId == 0 ) {
-            listService.getLists(function(response) {
+            listService.getLists($scope.team.id, function(response) {
                 $scope.currentList.child_lists = response.data;
                 $scope.currentList.id = 0;
                 $scope.currentList.title = "Your Team's Lists";
@@ -102,6 +94,12 @@ angular.module("listaroo")
         );
         }
 
+        $scope.inviteToTeam = function(username) {
+          teamService.inviteToTeam(username, $scope.team.id, function(response) {
+            $scope.team.invited_users.push(response.data)
+          });
+        }
+
         function findEntityById(entityArray, id) {
           for ( k = 0; k < entityArray.length; k++ ) {
             if ( entityArray[k].id ===  id ) {
@@ -111,11 +109,20 @@ angular.module("listaroo")
           return null;
         }
 
-        function checkLoggedIn() {
+        function checkLoggedInAndGetLists() {
           if (!$cookies.getObject('user')) {
             $location.path('/login');
           } else {
-            $scope.userId = $cookies.getObject('user').id;
+            $scope.user = $cookies.getObject('user');
+            teamService.getTeam($routeParams["teamId"], function(response) {
+              $scope.team = response.data;
+              listService.getLists($scope.team.id, function(response) {
+                  $scope.currentList.child_lists = response.data;
+                  $scope.currentList.title = $scope.team.name;
+                  $scope.currentList.id = 0;
+                  $scope.listTitleStack.push($scope.currentList.title);
+              });
+            });
           }
         }
       }
