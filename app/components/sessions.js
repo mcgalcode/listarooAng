@@ -1,6 +1,6 @@
 angular.module("listaroo").
   component("sessions", {
-    templateUrl: 'login.html',
+    templateUrl: '/views/login.html',
     controller: function($scope, $cookies, $location, sessionService) {
 
       $scope.submitLogin = function(username, password) {

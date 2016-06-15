@@ -1,6 +1,6 @@
 angular.module("listaroo").
   component("signUp", {
-    templateUrl: "signup.html",
+    templateUrl: "/views/signup.html",
     controller: function($scope, $cookies, $location, signUpService) {
 
       $scope.submitSignUp = function() {

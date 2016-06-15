@@ -1,6 +1,6 @@
 angular.module("listaroo")
   .component("listBox", {
-      templateUrl: "listbox.html",
+      templateUrl: "/views/listbox.html",
       controller: function($scope, $cookies, $location, $routeParams, teamService, listService, sessionService) {
 
         $scope.viewingList = false;

@@ -1,6 +1,6 @@
 angular.module("listaroo").
   component("teamBox", {
-    templateUrl: "teams.html",
+    templateUrl: "/views/teams.html",
     controller: function($scope, $cookies, $location, teamService, sessionService) {
 
 
