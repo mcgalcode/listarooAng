@@ -20,5 +20,5 @@ var mod = angular.module("listaroo", ['ngRoute', 'ngCookies']);
   });
 
 mod.run(function($rootScope) {
-    $rootScope.baseUrl = "http://listaroo.herokuapp.com";
+    $rootScope.baseUrl = "https://listaroo.herokuapp.com";
 });

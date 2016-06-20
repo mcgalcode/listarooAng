@@ -28,9 +28,9 @@ angular.module("listaroo").
       }
 
       $scope.logout = function() {
+        $cookies.remove('user');
+        $location.path('/login');
         sessionService.logout($scope.user.id, function(response) {
-          $cookies.remove('user');
-          $location.path('/login');
         });
       }
 
