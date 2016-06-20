@@ -99,6 +99,9 @@ angular.module("listaroo")
 
         $scope.updateList = function(list) {
           listService.updateList(list, function(response) {
+            if (list.id === $scope.currentList.id) {
+              $scope.listTitleStack[$scope.listTitleStack.length-1] = response.data.title;
+            }
           });
         }
 
