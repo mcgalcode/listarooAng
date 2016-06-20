@@ -4,6 +4,9 @@ angular.module("listaroo").
     controller: function($scope, $cookies, $location, teamService, sessionService) {
 
 
+      $scope.loadingCreated = false;
+      $scope.loadingInvited = false;
+
       setCurrentUser();
 
       $scope.clearErrors = function() {
@@ -12,11 +15,15 @@ angular.module("listaroo").
       }
 
       function getTeamsFromUser(userId) {
+        $scope.loadingCreated = true;
+        $scope.loadingInvited = true;
         teamService.getCreatedTeamsFromUser(userId, function(response) {
           $scope.createdTeams = response.data;
+          $scope.loadingCreated = false;
         })
         teamService.getInvitedTeamsFromUser(userId, function(response) {
           $scope.invitedTeams = response.data;
+          $scope.loadingInvited = false;
         });
       }
 

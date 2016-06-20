@@ -2,6 +2,7 @@ var mod = angular.module("listaroo", ['ngRoute', 'ngCookies']);
   mod.config(function($routeProvider) {
 
 
+
     $routeProvider
       .when('/teams/:teamId/lists', {
           template: '<list-box></list-box>'
@@ -14,9 +15,10 @@ var mod = angular.module("listaroo", ['ngRoute', 'ngCookies']);
       })
       .when('/teams', {
         template: '<team-box></team-box>'
-      });
+      })
+      .otherwise('/login');
   });
 
 mod.run(function($rootScope) {
-    $rootScope.baseUrl = "http://localhost:3000";
+    $rootScope.baseUrl = "http://listaroo.herokuapp.com";
 });

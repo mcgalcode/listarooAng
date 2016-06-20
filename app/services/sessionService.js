@@ -16,5 +16,4 @@ angular.module("listaroo").
       ).then(successCallback);
     }
 
-
   });

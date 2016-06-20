@@ -8,6 +8,8 @@ angular.module("listaroo").
       $scope.usernameRequired = "You must provide a username to log in"
       $scope.passwordRequired = "You must provide a password to log in"
 
+      checkLoggedIn();
+
       $scope.clearErrors = function() {
         $scope.errorsPresent = false;
         $scope.errorMessages = [];
@@ -31,6 +33,12 @@ angular.module("listaroo").
               $scope.password = "";
             }
           );
+        }
+      }
+
+      function checkLoggedIn() {
+        if (!!$cookies.getObject('user')) {
+          $location.path('/teams');
         }
       }
 

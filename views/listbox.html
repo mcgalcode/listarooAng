@@ -26,7 +26,9 @@
     </div>
 
     <div id="list-area">
-
+      <div class="loading-veil" ng-show="loading">
+        <img src="../assets/img/loading.gif" class="loading-spinner">
+      </div>
       <ul class="error-messages" ng-show="errorsPresent">
         <li ng-repeat="message in errorMessages" class="error-message">
           {{message}}

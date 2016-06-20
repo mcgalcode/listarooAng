@@ -11,6 +11,7 @@ angular.module("listaroo")
         $scope.listTitleStack = [];
         $scope.errorsPresent = false;
         $scope.errorMessages = [];
+        $scope.loading = false;
 
 
         $scope.clearErrors = function() {
@@ -66,14 +67,18 @@ angular.module("listaroo")
 
         $scope.getList = function(listId) {
           if (listId == 0 ) {
+            $scope.loading = true;
             listService.getLists($scope.team.id, function(response) {
                 $scope.currentList.child_lists = response.data;
                 $scope.currentList.id = 0;
                 $scope.currentList.title = "Your Team's Lists";
+                $scope.loading = false;
             });
           } else {
+            $scope.loading = true;
             listService.getList(listId, function(response) {
               $scope.currentList = response.data;
+              $scope.loading = false;
             });
           }
         }
@@ -138,11 +143,13 @@ angular.module("listaroo")
             $scope.user = $cookies.getObject('user');
             teamService.getTeam($routeParams["teamId"], function(response) {
               $scope.team = response.data;
+              $scope.loading = true;
               listService.getLists($scope.team.id, function(response) {
                   $scope.currentList.child_lists = response.data;
                   $scope.currentList.title = $scope.team.name;
                   $scope.currentList.id = 0;
                   $scope.listTitleStack.push($scope.currentList.title);
+                  $scope.loading = false;
               });
             });
           }
