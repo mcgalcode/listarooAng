@@ -13,7 +13,7 @@ angular.module("listaroo")
         .then(callback)
     }
 
-    this.addList = function(teamId, parentListId, listTitle, callback) {
+    this.addList = function(teamId, parentListId, listTitle, successCallback, errorCallback) {
       $http({
         method: 'POST',
         url: rootUrl + '/api/lists',
@@ -25,7 +25,7 @@ angular.module("listaroo")
           "teamId" : teamId,
           "parentListId" : parentListId
         }
-      }).then(callback);
+      }).then(successCallback, errorCallback);
     }
 
     this.deleteList = function(list, successCallback, errorCallback) {

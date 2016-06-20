@@ -9,6 +9,14 @@ angular.module("listaroo")
         $scope.parentListStack = [0];
         $scope.parentList = {};
         $scope.listTitleStack = [];
+        $scope.errorsPresent = false;
+        $scope.errorMessages = [];
+
+
+        $scope.clearErrors = function() {
+          $scope.errorsPresent = false;
+          $scope.errorMessages = [];
+        }
 
         checkLoggedInAndGetLists();
 
@@ -71,9 +79,16 @@ angular.module("listaroo")
         }
 
         $scope.addList = function(listTitle) {
+          $scope.errorsPresent = false;
+          $scope.errorMessages = [];
           listService.addList($scope.team.id, $scope.currentList.id, listTitle, function(response) {
             $scope.currentList.child_lists.push(response.data);
             $scope.newestListTitle = "";
+          }, function(response) {
+            $scope.errorsPresent = true;
+            for (var k = 0; k < response.data.errors.length; k++) {
+              $scope.errorMessages.push(response.data.errors[k]);
+            }
           });
         }
 
@@ -96,8 +111,15 @@ angular.module("listaroo")
 
         $scope.inviteToTeam = function(username) {
           teamService.inviteToTeam(username, $scope.team.id, function(response) {
-            $scope.team.invited_users.push(response.data)
-          });
+              $scope.team.invited_users.push({"username" : response.data.user.username});
+            },
+            function(response) {
+              $scope.errorsPresent = true;
+              for (var k = 0; k < response.data.errors.length; k++) {
+                $scope.errorMessages.push(response.data.errors[k]);
+              }
+              $scope.invitedUserName = "";
+            });
         }
 
         function findEntityById(entityArray, id) {

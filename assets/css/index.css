@@ -1,5 +1,6 @@
 html, body {
   height: 100%;
+  background-color: #EEEBBC;
   font-family: 'Open Sans', sans-serif;
   color: #EEEBBC;
 }
@@ -9,6 +10,10 @@ html, body {
 }
 
 a {
+  color: currentColor;
+}
+
+a:visited {
   color: currentColor;
 }
 
@@ -30,6 +35,26 @@ list-box {
 
 .inline {
   display: inline;
+}
+
+.error-messages {
+  background-color: #FBB;
+  color: #F22;
+  border: 1px solid #F22;
+  padding: 12px 12px 12px 40px;
+  margin: 0;
+  position: relative;
+}
+
+#clear-errors-button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+#clear-errors-button:hover {
+  cursor: pointer;
+  color: #F88;
 }
 
 
@@ -72,7 +97,8 @@ list-box {
   color: #EEEBBC;
 }
 
-
+#team-creator {
+}
 
 #team-name {
   margin: 0 20px 0 0;
@@ -179,10 +205,6 @@ list-box {
   margin-right: 10px;
 }
 
-#new-list-text {
-  font-size: 14px;
-}
-
 #editted-list-title {
   width: 100%;
   flex-grow: 1;
@@ -199,13 +221,17 @@ list-box {
   align-content: center;
 }
 
+#new-list-title {
+  margin-right: 10px;
+}
+
+#add-new-list-button {
+  line-height: 31px;
+}
+
 #new-list:hover {
   background-color: #FFFFFF;
   color: black;
-}
-
-#new-list-box {
-
 }
 
 .back-button {
@@ -240,7 +266,7 @@ list-box {
   background-color: white;
   list-style: none;
   margin: 0;
-  padding: 0 20px 0 20px;
+  padding: 0 20px 20px 20px;
   flex-grow: 1;
 }
 
@@ -270,6 +296,9 @@ list-box {
   align-items: center;
 }
 
+#team-info-box {
+  padding-top: 0;
+}
 
 /* LOGIN AND SIGNUP */
 
@@ -289,6 +318,10 @@ list-box {
 .login-page-main-button:hover {
   background-color: #207091;
   color: #EEEBBC;
+}
+
+.login-page-main-button:visited {
+  color: white;
 }
 
 .centered-title {

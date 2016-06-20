@@ -8,23 +8,29 @@ angular.module("listaroo").
       $scope.usernameRequired = "You must provide a username to log in"
       $scope.passwordRequired = "You must provide a password to log in"
 
-      $scope.submitLogin = function(username, password) {
+      $scope.clearErrors = function() {
         $scope.errorsPresent = false;
-        username = username.trim();
-        password = password.trim();
-        if (username.length < 1 ) {
-          $scope.errorsPresent = true;
-          $scope.errorMessages.push($scope.usernameRequired);
-        }
-        if (password.length < 1 ) {
-          $scope.errorsPresent = true;
-          $scope.errorMessages.push($scope.passwordRequired);
-        }
+        $scope.errorMessages = [];
+      }
+
+      $scope.submitLogin = function() {
+        username = $scope.username;
+        password = $scope.password;
+        $scope.errorsPresent = false;
+        $scope.errorMessages = [];
         if (!$scope.errorsPresent) {
-          sessionService.submitLogin(username, password, function(response) {
-            $cookies.putObject('user', response.data);
-            $location.path('/teams');
-          });
+          sessionService.submitLogin(username, password,
+            function(response) {
+              $cookies.putObject('user', response.data);
+              $location.path('/teams');
+            },
+            function(response) {
+              $scope.errorsPresent = true;
+              $scope.errorMessages.push(response.data.errors)
+              $scope.username = "";
+              $scope.password = "";
+            }
+          );
         }
       }
 

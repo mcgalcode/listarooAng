@@ -1,4 +1,4 @@
-<div class="centered-container">
+<div class="centered-container" id="team-info-box">
   <div class="user-info flex">
     <h1 class="inline">Your Teams</h1>
     <p class="inline">
@@ -6,7 +6,12 @@
       (<a href="" ng-click="logout()">Log Out</a>)
     </p>
   </div>
-
+  <ul class="error-messages" ng-show="errorsPresent">
+    <li ng-repeat="message in errorMessages" class="error-message">
+      {{message}}
+    </li>
+    <span class="glyphicon glyphicon-remove" id="clear-errors-button" ng-click="clearErrors()">
+  </ul>
   <div id="parent-teambox" class="flex">
     <ul class="teambox">
 
@@ -19,7 +24,7 @@
 
       </li>
       <p class="flex" id="add-new-team-box">
-        <input type="text" ng-model="newTeamName" id="new-team-name">
+        <input type="text" ng-model="newTeamName" id="new-team-name" placeholder="Team Name">
         <a href="" ng-click="addTeam(newTeamName)">Add team!</a>
       </p>
     </ul>

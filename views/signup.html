@@ -3,6 +3,12 @@
 
 
   <h1 class="centered-title">Sign up for Listaroo!</h1>
+  <ul class="error-messages" ng-show="errorsPresent">
+    <li ng-repeat="message in errorMessages" class="error-message">
+      {{message}}
+    </li>
+    <span class="glyphicon glyphicon-remove" id="clear-errors-button" ng-click="clearErrors()">
+  </ul>
   <input type="text" ng-model="user.username" placeholder="Username" class="login-page-field">
   <input type="password" ng-model="user.password" placeholder="Password" class="login-page-field">
   <input type="password" ng-model="user.passwordConf" placeholder="Password Confirmation" class="login-page-field">

@@ -15,11 +15,11 @@ angular.module("listaroo").
       ).then(successCallback)
     };
 
-    this.addTeam = function(team, successCallback) {
+    this.addTeam = function(team, successCallback, errorCallback) {
       $http.post(
         rootUrl + "/api/teams",
         team
-      ).then(successCallback);
+      ).then(successCallback, errorCallback);
     };
 
     this.getTeam = function(teamId, successCallback) {
@@ -34,13 +34,13 @@ angular.module("listaroo").
       ).then(successCallback);
     }
 
-    this.inviteToTeam = function(username, teamId, successCallback) {
+    this.inviteToTeam = function(username, teamId, successCallback, errorCallback) {
       $http.post(
         rootUrl + "/api/teams/" + teamId + "/invite",
         {
           "username" : username
         }
-      )
+      ).then(successCallback, errorCallback);
     }
 
 

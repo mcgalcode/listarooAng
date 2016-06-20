@@ -3,11 +3,11 @@ angular.module("listaroo").
 
     var rootUrl = $rootScope.baseUrl;
 
-    this.submitLogin = function(username, password, callback) {
+    this.submitLogin = function(username, password, successCallback, errorCallback) {
       $http.post(
         rootUrl + '/api/login',
         { 'username' : username, 'password' : password }
-      ).then(callback);
+      ).then(successCallback, errorCallback);
     };
 
     this.logout = function(id, successCallback) {

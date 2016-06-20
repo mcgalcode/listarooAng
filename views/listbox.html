@@ -12,8 +12,8 @@
 
     <div class="team-sidebar sidebar">
 
-      <p id="team-creator">team created by:<br /> {{team.creator.username}}</p>
-
+      <h4 id="team-creator">Created by  {{team.creator.username}}</h4>
+      <hr />
       <h4>Team Members:</h4>
       <ul id="team-members">
         <li ng-repeat="member in team.invited_users">
@@ -26,6 +26,14 @@
     </div>
 
     <div id="list-area">
+
+      <ul class="error-messages" ng-show="errorsPresent">
+        <li ng-repeat="message in errorMessages" class="error-message">
+          {{message}}
+        </li>
+        <span class="glyphicon glyphicon-remove" id="clear-errors-button" ng-click="clearErrors()">
+      </ul>
+
       <div id="list-info" ng-show="hasParent()" class="flex">
           <span  id="back-button" ng-click="goBackToParent();" class="glyphicon glyphicon-arrow-left list-button"></span>
           <h2 id="current-list-title" ng-show="!currentList.editing">{{currentList.title}}</h2>
@@ -50,8 +58,9 @@
         </li>
         <li class="sublist flex" ng-show="getCurrentListChildren().length === 0">This list has no items yet! Add one below</li>
         <li id="new-list" class="sublist flex">
-          <input placeholder="Add a new item here!" type="text" id="new-list-title" ng-model="newestListTitle" class="inline-list-entry">
-          <span ng-click="addList(newestListTitle)" class="glyphicon glyphicon-plus list-button"></span></li>
+          <input placeholder="Add a new item here!" type="text" id="new-list-title" ng-model="newestListTitle" class="inline-list-entry" ng-focus="errorsPresent = false; errorMessages = []">
+          <span ng-click="addList(newestListTitle)" id="add-new-list-button" class="glyphicon glyphicon-plus list-button"></span>
+        </li>
       </ul>
 
     </div>

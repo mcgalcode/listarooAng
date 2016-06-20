@@ -6,6 +6,10 @@ angular.module("listaroo").
 
       setCurrentUser();
 
+      $scope.clearErrors = function() {
+        $scope.errorsPresent = false;
+        $scope.errorMessages = [];
+      }
 
       function getTeamsFromUser(userId) {
         teamService.getCreatedTeamsFromUser(userId, function(response) {
@@ -28,13 +32,24 @@ angular.module("listaroo").
       }
 
       $scope.addTeam = function(teamName) {
+        $scope.errorsPresent = false;
+        $scope.errorMessages = [];
+
         team = {
           'name' : teamName,
           'creatorId' : $scope.user.id
         }
-        teamService.addTeam(team, function(response) {
-          $scope.createdTeams.push(response.data);
-        });
+        teamService.addTeam(team,
+          function(response) {
+            $scope.createdTeams.push(response.data);
+          },
+          function(response) {
+              $scope.errorsPresent = true;
+              for (var k = 0; k < response.data.errors.length; k++) {
+                $scope.errorMessages.push(response.data.errors[k]);
+              }
+              $scope.newTeamName = "";
+          });
       }
 
       $scope.deleteTeam = function(createdTeam, teamId) {

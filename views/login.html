@@ -1,7 +1,13 @@
 <div class="centered-container">
   <h1 class="centered-title">Listaroo Login Portal</h1>
+  <ul class="error-messages" ng-show="errorsPresent">
+    <li ng-repeat="message in errorMessages" class="error-message">
+      {{message}}
+    </li>
+    <span class="glyphicon glyphicon-remove" id="clear-errors-button" ng-click="clearErrors()">
+  </ul>
   <input type="text" ng-model="username" placeholder="Username" class="login-page-field">
   <input type="password" ng-model="password" placeholder="Password" class="login-page-field">
-  <a href="" ng-click="submitLogin(username, password)" class="login-page-main-button">Log in</a>
+  <a href="" ng-click="submitLogin()" class="login-page-main-button">Log in</a>
   <a href="#/signup" class="login-page-main-button">Sign up!</a>
 </div>
