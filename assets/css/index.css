@@ -28,6 +28,11 @@ list-box {
   display: flex;
 }
 
+.inline {
+  display: inline;
+}
+
+
 /* Sidebar */
 
 .team-sidebar {
@@ -162,6 +167,7 @@ list-box {
   height: 35px;
   line-height: 35px;
   display: inline-block;
+  padding-left: 5px;
 }
 
 .list-controls {
@@ -222,8 +228,79 @@ list-box {
 
 .team-delete:hover {
   cursor: pointer;
+  color: #AAA;
 }
 
 .team-name:hover {
   cursor: pointer;
+  text-decoration: underline;
+}
+
+.teambox {
+  background-color: white;
+  list-style: none;
+  margin: 0;
+  padding: 0 20px 0 20px;
+  flex-grow: 1;
+}
+
+#parent-teambox {
+  color: black;
+}
+
+.team-listing {
+  padding: 5px;
+  border-bottom: 1px solid grey;
+  display: flex;
+  justify-content: space-between;
+}
+
+#new-team-name {
+  flex-grow: 1;
+  margin-right: 15px;
+  padding: 5px;
+}
+
+#add-new-team-box {
+  align-items: center;
+}
+
+.user-info {
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* LOGIN AND SIGNUP */
+
+.login-page-main-button {
+  display: block;
+  background-color: #005071;
+  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3px;
+  text-align: center;
+  padding: 10px;
+  width: 350px;
+  color: white;
+}
+
+.login-page-main-button:hover {
+  background-color: #207091;
+  color: #EEEBBC;
+}
+
+.centered-title {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.login-page-field {
+  width: 350px;
+  display: block;
+  padding: 7px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3px;
 }

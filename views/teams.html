@@ -1,28 +1,35 @@
 <div class="centered-container">
-  <p>Welcome {{user.username}}</p>
-  <a href="" ng-click="logout()">Log Out</a>
-  <h1>Your Teams</h1>
-  <ul>
+  <div class="user-info flex">
+    <h1 class="inline">Your Teams</h1>
+    <p class="inline">
+      <span>Welcome {{user.username}}!</span>
+      (<a href="" ng-click="logout()">Log Out</a>)
+    </p>
+  </div>
 
-    <h2>Your created teams</h2>
+  <div id="parent-teambox" class="flex">
+    <ul class="teambox">
 
-    <li ng-repeat="team in createdTeams">
-      <span ng-click="goToTeam(team)" class="team-name">{{team.name}}</span>
-      <span ng-click="deleteTeam(true, team.id)" class="team-delete">Delete</span>
+      <h2>Teams you created</h2>
+
+      <li ng-repeat="team in createdTeams" class="team-listing">
+        <span ng-click="goToTeam(team)" class="team-name">{{team.name}}</span>
+        <span ng-click="deleteTeam(true, team.id)" class="team-delete glyphicon glyphicon-trash"></span>
 
 
-    </li>
-  </ul>
-  <ul>
-    <h2>Your invited teams</h2>
-    <li ng-repeat="team in invitedTeams">
-      <span ng-click="goToTeam(team)" class="team-name">{{team.name}}</span>
-      <span ng-click="deleteTeam(false, team.id)" class="team-delete">Delete</span>
+      </li>
+      <p class="flex" id="add-new-team-box">
+        <input type="text" ng-model="newTeamName" id="new-team-name">
+        <a href="" ng-click="addTeam(newTeamName)">Add team!</a>
+      </p>
+    </ul>
+    <ul class="teambox">
+      <h2>Teams you were invited to</h2>
+      <li ng-repeat="team in invitedTeams"  class="team-listing">
+        <span ng-click="goToTeam(team)" class="team-name">{{team.name}}</span>
+        <span ng-click="deleteTeam(false, team.id)" class="team-delete glyphicon glyphicon-trash"></span>
 
-    </li>
-  </ul>
-  <p>
-    <input type="text" ng-model="newTeamName">
-    <a href="" ng-click="addTeam(newTeamName)">Add team!</a>
-  </p>
+      </li>
+    </ul>
+  </div>
 </div>

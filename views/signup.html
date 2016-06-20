@@ -1,21 +1,15 @@
 <div class="centered-container">
 
-  <a href="#/login">Login!</a>
 
 
-  <h1>Sign up for Listaroo!</h1>
-  <label>Username</label>
-  <input type="text" ng-model="user.username"><br />
-  <label>Password</label>
-  <input type="text" ng-model="user.password"><br />
-  <label>Password Confirmation</label>
-  <input type="text" ng-model="user.passwordConf"><br />
-  <label>First Name</label>
-  <input type="text" ng-model="user.firstName"><br />
-  <label>Last Name</label>
-  <input type="text" ng-model="user.lastName"><br />
-  <label>Email</label>
-  <input type="text" ng-model="user.email"><br />
-  <a href="" ng-click="submitSignUp()">Sign up!</a>
+  <h1 class="centered-title">Sign up for Listaroo!</h1>
+  <input type="text" ng-model="user.username" placeholder="Username" class="login-page-field">
+  <input type="password" ng-model="user.password" placeholder="Password" class="login-page-field">
+  <input type="password" ng-model="user.passwordConf" placeholder="Password Confirmation" class="login-page-field">
+  <input type="text" ng-model="user.firstName" placeholder="First name" class="login-page-field">
+  <input type="text" ng-model="user.lastName" placeholder="Last name" class="login-page-field">
+  <input type="text" ng-model="user.email" placeholder="Email Address" class="login-page-field">
+  <a href="" ng-click="submitSignUp()" class="login-page-main-button">Sign up!</a>
+  <a href="#/login" class="login-page-main-button"><span class="glyphicon glyphicon-arrow-left"></span> Back to login</a>
 
 </div>
