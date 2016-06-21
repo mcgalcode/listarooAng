@@ -12,11 +12,12 @@
 
     <div class="team-sidebar sidebar">
 
-      <h4 id="team-creator">Created by  {{team.creator.username}}</h4>
-      <hr />
-      <h4>Team Members:</h4>
+      <h4 id="team-creator" class="sidebar-heading">Team Creator:</h4>
+      <span>{{team.creator.username}}
+      <hr id="member-divider"/>
+      <h4 class="sidebar-heading">Team Members:</h4>
       <ul id="team-members">
-        <li ng-repeat="member in team.invited_users">
+        <li ng-repeat="member in team.invited_users" class="invited-username">
           {{member.username}}
         </li>
         <input id="invited-user-input" type="text" ng-model="invitedUserName">

@@ -67,6 +67,15 @@ list-box {
   flex-grow: 0;
 }
 
+.sidebar-heading {
+  margin: 0 0 2px 0;
+  text-decoration: underline;
+}
+
+#member-divider {
+  margin: 5px 0 5px 0;
+}
+
 #invite-box {
   background-color: black;
   z-index: 99;
@@ -77,8 +86,20 @@ list-box {
 }
 
 #team-members {
-  list-style:square ;
+  margin: 0px;
+  list-style: none;
   padding: 0;
+}
+
+.invited-username:before {
+  content:'';
+  height: 1em;
+  width: 1em;
+  background-image: url('../img/kangaroo-hopping.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-left: 1.5em;
+
 }
 
 
