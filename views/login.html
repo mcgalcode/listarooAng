@@ -1,4 +1,7 @@
 <div class="centered-container">
+  <div class="loading-veil-clear" ng-show="loading">
+    <img src="../assets/img/loading.gif" height="100px" width="100px"  class="loading-spinner">
+  </div>
   <h1 class="centered-title"><img height="50" src="/../assets/img/kangaroo-hopping.svg"> Listaroo Login Portal</h1>
   <ul class="error-messages" ng-show="errorsPresent">
     <li ng-repeat="message in errorMessages" class="error-message">
