@@ -3,6 +3,7 @@ angular.module("listaroo").
     templateUrl: '/views/login.html',
     controller: function($scope, $cookies, $location, sessionService) {
 
+      // This flag is used in the CSS to show an error message if necessary
       $scope.errorsPresent = false;
       $scope.errorMessages = [];
       $scope.usernameRequired = "You must provide a username to log in"
@@ -19,6 +20,8 @@ angular.module("listaroo").
       $scope.submitLogin = function() {
         username = $scope.username;
         password = $scope.password;
+        // Before continuing, reset all the error message (in preparation for potential new ones)
+        // and show a loading icon which will be hidden in callback
         $scope.loading = true;
         $scope.errorsPresent = false;
         $scope.errorMessages = [];
@@ -30,6 +33,7 @@ angular.module("listaroo").
               $scope.loading = false;
             },
             function(response) {
+              // Report the errors to the UI by storign them in errorMEssages
               $scope.errorsPresent = true;
               $scope.errorMessages.push(response.data.errors)
               $scope.username = "";
@@ -40,6 +44,7 @@ angular.module("listaroo").
         }
       }
 
+      // A user is said to be logged in if there is no cookie corresponding to him
       function checkLoggedIn() {
         if (!!$cookies.getObject('user')) {
           $location.path('/teams');

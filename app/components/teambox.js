@@ -15,6 +15,7 @@ angular.module("listaroo").
       }
 
       function getTeamsFromUser(userId) {
+        // two different loading flags for two different requests happening simultaneously
         $scope.loadingCreated = true;
         $scope.loadingInvited = true;
         teamService.getCreatedTeamsFromUser(userId, function(response) {
@@ -71,6 +72,7 @@ angular.module("listaroo").
         });
       }
 
+      // This is just a helper function that, given an array, finds the index of a particular element
       function findEntityById(entityArray, id) {
         for ( k = 0; k < entityArray.length; k++ ) {
           if ( entityArray[k].id ===  id ) {
